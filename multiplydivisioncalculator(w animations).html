@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Multiply and Divide</title>
+  <style>
+    /* Colors from your sample */
+    :root {
+      --accent: #41e0ff;
+      --accent2: #2d7df6;
+      --glass-bg: rgba(30,44,75,0.76);
+      --glass-blur: blur(12px);
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(-45deg, #1e3c72, #2a5298, #1e3c72, #1e3c72);
+      background-size: 400% 400%;
+      animation: gradientBG 17s ease infinite;
+      color: #f6f8fc;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 60%; }
+      50% { background-position: 100% 40%; }
+      100% { background-position: 0% 60%; }
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input[type="number"] {
+      width: 200px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1.5px solid var(--accent2);
+      background: var(--glass-bg);
+      color: #f6f8fc;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color 0.25s;
+    }
+    input[type="number"]:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 8px var(--accent);
+    }
+
+    button {
+      background: var(--glass-bg);
+      color: var(--accent);
+      border: 1.5px solid var(--accent2);
+      padding: 10px 24px;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 16px;
+      margin-right: 12px;
+      cursor: pointer;
+      transition:
+        box-shadow 0.3s ease,
+        transform 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease;
+      user-select: none;
+      backdrop-filter: var(--glass-blur);
+    }
+    button:last-child {
+      margin-right: 0;
+    }
+    button:hover {
+      box-shadow: 0 0 20px var(--accent2), 0 0 40px var(--accent);
+      transform: scale(1.08);
+      background: var(--accent2);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    #result-container {
+      margin-top: 30px;
+      background: var(--glass-bg);
+      padding: 20px 30px;
+      border-radius: 22px;
+      border: 1.5px solid rgba(128,182,255,0.11);
+      box-shadow: 0 6px 30px rgba(34,54,89,0.15);
+      width: 260px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: var(--accent);
+      backdrop-filter: var(--glass-blur);
+      transition: box-shadow 0.3s ease, transform 0.3s ease;
+      user-select: none;
+    }
+    #result-container:hover {
+      box-shadow: 0 10px 60px 0px var(--accent2), 0 1.5px 0 var(--accent2);
+      transform: scale(1.02);
+    }
+
+    #result-label {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+
+    #result-text {
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      color: var(--accent2);
+    }
+  </style>
+</head>
+<body>
+  <h2>Multiply and Divide Two Numbers</h2>
+
+  <label for="num1">1st number:</label>
+  <input type="number" id="num1" />
+
+  <label for="num2" style="margin-top:16px;">2nd number:</label>
+  <input type="number" id="num2" />
+
+  <div style="margin-top: 20px;">
+    <button onclick="multiply()">Multiply</button>
+    <button onclick="divide()">Divide</button>
+  </div>
+
+  <div id="result-container" tabindex="0" aria-live="polite" aria-atomic="true">
+    <div id="result-label">The result is:</div>
+    <div id="result-text"></div>
+  </div>
+
+  <script>
+    function multiply() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        document.getElementById("result-text").innerText = "Please enter valid numbers.";
+        return;
+      }
+
+      const result = num1 * num2;
+      document.getElementById("result-text").innerText = result;
+    }
+
+    function divide() {
+      const num1 = parseFloat(document.getElementById("num1").value);
+      const num2 = parseFloat(document.getElementById("num2").value);
+
+      if (isNaN(num1) || isNaN(num2)) {
+        document.getElementById("result-text").innerText = "Please enter valid numbers.";
+        return;
+      }
+
+      if (num2 === 0) {
+        document.getElementById("result-text").innerText = "Cannot divide by zero.";
+        return;
+      }
+
+      const result = (num1 / num2).toFixed(2);
+      document.getElementById("result-text").innerText = result;
+    }
+  </script>
+</body>
+</html>
